@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 703717180}
   - component: {fileID: 703717179}
   - component: {fileID: 703717178}
+  - component: {fileID: 703717182}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -548,6 +549,19 @@ Transform:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703717182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703717177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a2cce322add084999982dfbbe61fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &888257654
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 888257655}
+  - component: {fileID: 888257656}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -579,6 +594,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &888257656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888257654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e851864a188f54cb119b8225377dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapSize: {x: 10, y: 10}
+  RoomQuantity: 5
+  minDeadEnds: 2
+  mapSeed: 574
 --- !u!1 &2050603871
 GameObject:
   m_ObjectHideFlags: 0
