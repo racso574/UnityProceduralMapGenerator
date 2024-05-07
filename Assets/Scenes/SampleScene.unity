@@ -622,8 +622,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapSize: {x: 6, y: 6}
   RoomQuantity: 8
-  minDeadEnds: 3
-  mapSeed: -538637715
+  minDeadEnds: 5
+  mapSeed: 1206974296
   testiterations: 50000
 --- !u!114 &888257658
 MonoBehaviour:

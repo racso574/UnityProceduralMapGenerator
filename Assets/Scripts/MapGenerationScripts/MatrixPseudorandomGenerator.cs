@@ -5,53 +5,48 @@ using UnityEngine;
 
 public class MatrixPseudorandomGenerator : MonoBehaviour
 {
-    private int maxDeadEndsIteration;
-    private int DeadEndsIteration;
     private int roomsPlaced;
     private int deadEndsCount;
+
+    private int contarodorejecuciones;
 
     private int[,] bitmap;
     private int[,] roomOrientationMap;
 
     public (int[,], int[,]) StartRoomOrientationMatrixGeneration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
     {
+        contarodorejecuciones = 0;
         UnityEngine.Random.InitState(mapSeed);
         bitmap = new int[MapSize.x, MapSize.y];
-        roomsPlaced = 0;
-        deadEndsCount = 0;
-        //DeadEndsIteration = 0;
-        maxDeadEndsIteration = 2000;
         PrepareMatrixBeforeFilling(MapSize,RoomQuantity,minDeadEnds,mapSeed); 
-        FillOutTheMatrix(MapSize,RoomQuantity,minDeadEnds,mapSeed);
-        MatrixRoomDirectionTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);
+        Debug.Log("contarodorejecuciones"+ contarodorejecuciones);
         return (bitmap, roomOrientationMap);
     }
 
     void PrepareMatrixBeforeFilling(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed){
         
+        roomsPlaced = 1;
+        deadEndsCount = 0;
+        contarodorejecuciones++;
+
         int casillaCentralX = bitmap.GetLength(0) / 2;
         int casillaCentralY = bitmap.GetLength(1) / 2;
 
         bitmap[casillaCentralX, casillaCentralY] = 1;
 
-        roomsPlaced++;
-        DeadEndsIteration++;
-        
+        FillOutTheMatrix(MapSize,RoomQuantity,minDeadEnds,mapSeed);
+        MatrixRoomDirectionTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);
     }
     
     void FillOutTheMatrix(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
     {
-       
-        int maxIterations = 1000; // Ajusta según sea necesario
-        int iterationCount = 0;
-
-        while (roomsPlaced < RoomQuantity && iterationCount < maxIterations)
+        while (roomsPlaced < RoomQuantity)
         {
             for (int i = 0; i < bitmap.GetLength(0); i++)
             {
                 for (int j = 0; j < bitmap.GetLength(1); j++)
                 {
-                    if (roomsPlaced < RoomQuantity && bitmap[i, j] == 0)
+                    if (bitmap[i, j] == 0)
                     {
                         int adjacentOnes = CountAdjacentOnes(i, j);
 
@@ -69,16 +64,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
                     }
                 }
             }
-
-            iterationCount++;
-        }
-
-        if (iterationCount >= maxIterations)
-        {
-            Debug.LogError("array");
-        }
-           
-           
+        }  
     }
 
     void MatrixRoomDirectionTypeReEnumeration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed){
@@ -117,15 +103,11 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
             PrintMatrix(roomOrientationMap);
             
         }
-        else if (DeadEndsIteration < maxDeadEndsIteration)
-        {
-            // Recursive call with updated parameters
-            StartRoomOrientationMatrixGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
-            Debug.Log("a generar de nuevo");
-        }
         else
         {
-            Debug.LogError("Deathends");
+            SetMatrixToZero(bitmap);
+            SetMatrixToZero(roomOrientationMap);
+            PrepareMatrixBeforeFilling(MapSize,RoomQuantity,minDeadEnds,mapSeed); 
         }
     }
 
@@ -142,6 +124,20 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
         }
 
         Debug.Log(matrixString);
+    }
+
+    private void SetMatrixToZero(int[,] matrix)
+    {
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                matrix[i, j] = 0;
+            }
+        }
     }
 
     int GetAdjacentConfiguration(int x, int y)
