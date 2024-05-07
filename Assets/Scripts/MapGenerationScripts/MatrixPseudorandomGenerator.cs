@@ -10,28 +10,28 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
     private int roomsPlaced;
     private int deadEndsCount;
 
-    private int[,] binariMatrix;
-    private int[,] roomLayoutTypeMatrix;
+    private int[,] bitmap;
+    private int[,] roomOrientationMap;
 
-    public (int[,], int[,]) StartRoomGeneration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
+    public (int[,], int[,]) StartRoomOrientationMatrixGeneration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
     {
         UnityEngine.Random.InitState(mapSeed);
-        binariMatrix = new int[MapSize.x, MapSize.y];
+        bitmap = new int[MapSize.x, MapSize.y];
         roomsPlaced = 0;
         deadEndsCount = 0;
         maxDeadEndsIteration = 1000;
         PrepareMatrixBeforeFilling(MapSize,RoomQuantity,minDeadEnds,mapSeed); 
         FillOutTheMatrix(MapSize,RoomQuantity,minDeadEnds,mapSeed);
-        MatrixRoomLayoutTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);  
-        return (binariMatrix, roomLayoutTypeMatrix);
+        MatrixRoomDirectionTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);  
+        return (bitmap, roomOrientationMap);
     }
 
     void PrepareMatrixBeforeFilling(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed){
         
-        int casillaCentralX = binariMatrix.GetLength(0) / 2;
-        int casillaCentralY = binariMatrix.GetLength(1) / 2;
+        int casillaCentralX = bitmap.GetLength(0) / 2;
+        int casillaCentralY = bitmap.GetLength(1) / 2;
 
-        binariMatrix[casillaCentralX, casillaCentralY] = 1;
+        bitmap[casillaCentralX, casillaCentralY] = 1;
 
         roomsPlaced++;
         DeadEndsIteration++;
@@ -46,11 +46,11 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
 
         while (roomsPlaced < RoomQuantity && iterationCount < maxIterations)
         {
-            for (int i = 0; i < binariMatrix.GetLength(0); i++)
+            for (int i = 0; i < bitmap.GetLength(0); i++)
             {
-                for (int j = 0; j < binariMatrix.GetLength(1); j++)
+                for (int j = 0; j < bitmap.GetLength(1); j++)
                 {
-                    if (roomsPlaced < RoomQuantity && binariMatrix[i, j] == 0)
+                    if (roomsPlaced < RoomQuantity && bitmap[i, j] == 0)
                     {
                         int adjacentOnes = CountAdjacentOnes(i, j);
 
@@ -61,7 +61,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
 
                             if (randomProbability <= probabilityThreshold)
                             {
-                                binariMatrix[i, j] = 1;
+                                bitmap[i, j] = 1;
                                 roomsPlaced++;
                             }
                         }
@@ -80,46 +80,46 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
            
     }
 
-    void MatrixRoomLayoutTypeReEnumeration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed){
+    void MatrixRoomDirectionTypeReEnumeration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed){
 
-        roomLayoutTypeMatrix = new int[binariMatrix.GetLength(0), binariMatrix.GetLength(1)];
+        roomOrientationMap = new int[bitmap.GetLength(0), bitmap.GetLength(1)];
 
-        for (int i = 0; i < binariMatrix.GetLength(0); i++)
+        for (int i = 0; i < bitmap.GetLength(0); i++)
         {
-            for (int j = 0; j < binariMatrix.GetLength(1); j++)
+            for (int j = 0; j < bitmap.GetLength(1); j++)
             {
                 int adjacentOnes = CountAdjacentOnes(i, j);
 
-                if (binariMatrix[i, j] == 1)
+                if (bitmap[i, j] == 1)
                 {
                     if (adjacentOnes == 4)
-                        roomLayoutTypeMatrix[i, j] = 15;
+                        roomOrientationMap[i, j] = 15;
                     else if (adjacentOnes == 3)
-                        roomLayoutTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
+                        roomOrientationMap[i, j] = GetAdjacentConfiguration(i, j);
                     else if (adjacentOnes == 2)
-                        roomLayoutTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
+                        roomOrientationMap[i, j] = GetAdjacentConfiguration(i, j);
                     else{
-                        roomLayoutTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
+                        roomOrientationMap[i, j] = GetAdjacentConfiguration(i, j);
                         deadEndsCount++;
                     }
                         
                 }
                 else
                 {
-                    roomLayoutTypeMatrix[i, j] = 0;
+                    roomOrientationMap[i, j] = 0;
                 }
             }
         }
         if (deadEndsCount >= minDeadEnds)
         {
  
-            PrintMatrix(roomLayoutTypeMatrix);
+            PrintMatrix(roomOrientationMap);
             
         }
         else if (DeadEndsIteration < maxDeadEndsIteration)
         {
             // Recursive call with updated parameters
-            StartRoomGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
+            StartRoomOrientationMatrixGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
             Debug.Log("a generar de nuevo");
         }
         else
@@ -147,10 +147,10 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
     {
         int configuration = 0;
 
-        if (x > 0 && binariMatrix[x - 1, y] == 1) configuration += 2;
-        if (x < binariMatrix.GetLength(0) - 1 && binariMatrix[x + 1, y] == 1) configuration += 1;
-        if (y > 0 && binariMatrix[x, y - 1] == 1) configuration += 4;
-        if (y < binariMatrix.GetLength(1) - 1 && binariMatrix[x, y + 1] == 1) configuration += 8;
+        if (x > 0 && bitmap[x - 1, y] == 1) configuration += 2;
+        if (x < bitmap.GetLength(0) - 1 && bitmap[x + 1, y] == 1) configuration += 1;
+        if (y > 0 && bitmap[x, y - 1] == 1) configuration += 4;
+        if (y < bitmap.GetLength(1) - 1 && bitmap[x, y + 1] == 1) configuration += 8;
 
         return configuration;
     }
@@ -159,10 +159,10 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
     {
         int count = 0;
 
-        if (x > 0 && binariMatrix[x - 1, y] == 1) count++;
-        if (x < binariMatrix.GetLength(0) - 1 && binariMatrix[x + 1, y] == 1) count++;
-        if (y > 0 && binariMatrix[x, y - 1] == 1) count++;
-        if (y < binariMatrix.GetLength(1) - 1 && binariMatrix[x, y + 1] == 1) count++;
+        if (x > 0 && bitmap[x - 1, y] == 1) count++;
+        if (x < bitmap.GetLength(0) - 1 && bitmap[x + 1, y] == 1) count++;
+        if (y > 0 && bitmap[x, y - 1] == 1) count++;
+        if (y < bitmap.GetLength(1) - 1 && bitmap[x, y + 1] == 1) count++;
 
         return count;
     }

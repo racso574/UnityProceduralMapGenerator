@@ -4,29 +4,30 @@ using UnityEngine;
 using System;
 
 
-public class LvLGenerationController : MonoBehaviour
+public class LvlGenerationController : MonoBehaviour
 {
     public Vector2Int MapSize;
     public int RoomQuantity;
     public int minDeadEnds;
     public int mapSeed;
 
+
+
     private int[,] bitmap;
-    private int[,] roomorientationmap;
+    private int[,] roomOrientationMap;
+    private int[,] roomTypeMap;
+
 
     public void GenerateNewMatrix()
     {
         MatrixPseudorandomGenerator matrixGenerator = GetComponent<MatrixPseudorandomGenerator>();
+        RoomTypeDesignator roomTypeDesignator = GetComponent<RoomTypeDesignator>();
         mapSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
-        (bitmap, roomorientationmap) = matrixGenerator.StartRoomGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
-        FunctionToExecuteAfterMatrixGeneration();
+        (bitmap, roomOrientationMap) = matrixGenerator.StartRoomOrientationMatrixGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
+        roomTypeMap = roomTypeDesignator.StartRoomTypeMatrixGeneration();
     }
 
-    public void FunctionToExecuteAfterMatrixGeneration()
-    {
-        // Aquí es donde puedes ejecutar la función que desees después de recibir las matrices
-        Debug.Log("Matrices generadas correctamente.");
-    }
+    
 
   
 }
