@@ -607,10 +607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e851864a188f54cb119b8225377dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapSize: {x: 10, y: 10}
-  RoomQuantity: 5
-  minDeadEnds: 2
-  mapSeed: 574
 --- !u!114 &888257657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca3f4e4d008a454289a7dc2cef49e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapSize: {x: 12, y: 12}
+  RoomQuantity: 12
+  minDeadEnds: 3
+  mapSeed: 0
 --- !u!1 &2050603871
 GameObject:
   m_ObjectHideFlags: 0
