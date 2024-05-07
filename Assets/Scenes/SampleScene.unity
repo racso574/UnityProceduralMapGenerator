@@ -621,9 +621,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapSize: {x: 6, y: 6}
-  RoomQuantity: 12
+  RoomQuantity: 8
   minDeadEnds: 3
-  mapSeed: 647854772
+  mapSeed: 1910388339
+  testiterations: 100000
 --- !u!114 &888257658
 MonoBehaviour:
   m_ObjectHideFlags: 0

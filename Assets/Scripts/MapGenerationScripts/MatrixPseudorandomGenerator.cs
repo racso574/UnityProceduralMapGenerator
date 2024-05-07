@@ -19,10 +19,11 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
         bitmap = new int[MapSize.x, MapSize.y];
         roomsPlaced = 0;
         deadEndsCount = 0;
-        maxDeadEndsIteration = 1000;
+        //DeadEndsIteration = 0;
+        maxDeadEndsIteration = 1000000;
         PrepareMatrixBeforeFilling(MapSize,RoomQuantity,minDeadEnds,mapSeed); 
         FillOutTheMatrix(MapSize,RoomQuantity,minDeadEnds,mapSeed);
-        MatrixRoomDirectionTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);  
+        MatrixRoomDirectionTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);
         return (bitmap, roomOrientationMap);
     }
 
@@ -41,7 +42,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
     void FillOutTheMatrix(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
     {
        
-        int maxIterations = 10000; // Ajusta según sea necesario
+        int maxIterations = 1000; // Ajusta según sea necesario
         int iterationCount = 0;
 
         while (roomsPlaced < RoomQuantity && iterationCount < maxIterations)
@@ -74,7 +75,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
 
         if (iterationCount >= maxIterations)
         {
-            Debug.LogError("Generación de mapa fallida. Se alcanzó el límite de iteraciones.");
+            Debug.LogError("array");
         }
            
            
@@ -124,7 +125,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
         }
         else
         {
-            Debug.Log("liada maxima datos de mapa mal configurados");
+            Debug.LogError("Deathends");
         }
     }
 
