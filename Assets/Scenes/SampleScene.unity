@@ -573,6 +573,7 @@ GameObject:
   - component: {fileID: 888257655}
   - component: {fileID: 888257656}
   - component: {fileID: 888257657}
+  - component: {fileID: 888257658}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -621,8 +622,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapSize: {x: 6, y: 6}
   RoomQuantity: 12
-  minDeadEnds: 8
-  mapSeed: -974111214
+  minDeadEnds: 3
+  mapSeed: 647854772
+--- !u!114 &888257658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888257654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40861dff5a031c3489e39758ab2bb0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2050603871
 GameObject:
   m_ObjectHideFlags: 0
