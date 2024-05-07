@@ -623,8 +623,8 @@ MonoBehaviour:
   MapSize: {x: 6, y: 6}
   RoomQuantity: 8
   minDeadEnds: 5
-  mapSeed: 1206974296
-  testiterations: 50000
+  mapSeed: -2059710967
+  testiterations: 1
 --- !u!114 &888257658
 MonoBehaviour:
   m_ObjectHideFlags: 0
