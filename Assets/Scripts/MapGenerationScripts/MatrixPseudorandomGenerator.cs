@@ -20,7 +20,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
         roomsPlaced = 0;
         deadEndsCount = 0;
         //DeadEndsIteration = 0;
-        maxDeadEndsIteration = 1000000;
+        maxDeadEndsIteration = 2000;
         PrepareMatrixBeforeFilling(MapSize,RoomQuantity,minDeadEnds,mapSeed); 
         FillOutTheMatrix(MapSize,RoomQuantity,minDeadEnds,mapSeed);
         MatrixRoomDirectionTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);
