@@ -619,10 +619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca3f4e4d008a454289a7dc2cef49e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapSize: {x: 12, y: 12}
+  MapSize: {x: 6, y: 6}
   RoomQuantity: 12
-  minDeadEnds: 3
-  mapSeed: 0
+  minDeadEnds: 8
+  mapSeed: -974111214
 --- !u!1 &2050603871
 GameObject:
   m_ObjectHideFlags: 0

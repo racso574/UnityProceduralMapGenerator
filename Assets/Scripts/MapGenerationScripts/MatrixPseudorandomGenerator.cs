@@ -13,19 +13,17 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
     private int[,] binariMatrix;
     private int[,] roomLayoutTypeMatrix;
 
-    private void Start(){
-    //StartRoomGeneration();
-
-    }
-
-    public void StartRoomGeneration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
+    public (int[,], int[,]) StartRoomGeneration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
     {
         UnityEngine.Random.InitState(mapSeed);
         binariMatrix = new int[MapSize.x, MapSize.y];
         roomsPlaced = 0;
         deadEndsCount = 0;
         maxDeadEndsIteration = 1000;
-        PrepareMatrixBeforeFilling(MapSize,RoomQuantity,minDeadEnds,mapSeed);   
+        PrepareMatrixBeforeFilling(MapSize,RoomQuantity,minDeadEnds,mapSeed); 
+        FillOutTheMatrix(MapSize,RoomQuantity,minDeadEnds,mapSeed);
+        MatrixRoomLayoutTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed);  
+        return (binariMatrix, roomLayoutTypeMatrix);
     }
 
     void PrepareMatrixBeforeFilling(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed){
@@ -37,7 +35,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
 
         roomsPlaced++;
         DeadEndsIteration++;
-        FillOutTheMatrix(MapSize,RoomQuantity,minDeadEnds,mapSeed);
+        
     }
     
     void FillOutTheMatrix(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
@@ -78,7 +76,7 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
         {
             Debug.LogError("Generación de mapa fallida. Se alcanzó el límite de iteraciones.");
         }
-           MatrixRoomLayoutTypeReEnumeration(MapSize,RoomQuantity,minDeadEnds,mapSeed); 
+           
            
     }
 
