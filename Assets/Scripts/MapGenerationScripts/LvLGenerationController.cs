@@ -8,6 +8,9 @@ public class LvlGenerationController : MonoBehaviour
     public Vector2Int MapSize;
     public int RoomQuantity;
     public int minDeadEnds;
+
+    
+
     public int mapSeed;
     public int testiterations;
 
