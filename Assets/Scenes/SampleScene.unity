@@ -620,10 +620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca3f4e4d008a454289a7dc2cef49e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapSize: {x: 10, y: 10}
+  MapSize: {x: 11, y: 11}
   RoomQuantity: 8
   minDeadEnds: 5
-  mapSeed: 339290089
+  mapSeed: 1434023633
   testiterations: 1
 --- !u!114 &888257658
 MonoBehaviour:

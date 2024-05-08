@@ -16,7 +16,8 @@ public class LvlGenerationController : MonoBehaviour
 
     private int[,] bitmap;
     private int[,] roomOrientationMap;
-    private int[,] roomTypeMap;
+    private List<Vector2> DeadEndsList;
+
 
     public void GenerateNewMatrix()
     {
@@ -29,10 +30,10 @@ public class LvlGenerationController : MonoBehaviour
     private void Funcion1()
     {
         MatrixPseudorandomGenerator matrixGenerator = GetComponent<MatrixPseudorandomGenerator>();
-        RoomTypeDesignator roomTypeDesignator = GetComponent<RoomTypeDesignator>();
+        DeadEndsSorter roomTypeDesignator = GetComponent<DeadEndsSorter>();
         mapSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         (bitmap, roomOrientationMap) = matrixGenerator.StartRoomOrientationMatrixGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
-        roomTypeMap = roomTypeDesignator.StartRoomTypeMatrixGeneration();
+        DeadEndsList = roomTypeDesignator.GetSortedDeadEndsList(roomOrientationMap);
     }
 }
 
