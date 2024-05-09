@@ -22,20 +22,12 @@ public class DeadEndsSorter : MonoBehaviour
         Vector2 startDeadEnd = deadEnds[Random.Range(0, deadEnds.Count)];
 
         // Utiliza el algoritmo de búsqueda de caminos para encontrar el camino más largo
-        Vector2 farthestDeadEnd = FindFarthestDeadEnd(startDeadEnd, roomOrientationMap);
-        DeadEndsList.Add(farthestDeadEnd);
-        Vector2 farthestDeadEnd2 = FindFarthestDeadEnd(farthestDeadEnd, roomOrientationMap);
+        Vector2 farthestDeadEnd1 = FindFarthestDeadEnd(startDeadEnd, roomOrientationMap);
+        DeadEndsList.Add(farthestDeadEnd1);
+        Vector2 farthestDeadEnd2 = FindFarthestDeadEnd(farthestDeadEnd1, roomOrientationMap);
         DeadEndsList.Add(farthestDeadEnd2);
         
-        foreach (Vector2 deadEnd in deadEnds)
-        {
-            // Verificar si el vector2 actual ya está en DeadEndsList
-            if (!DeadEndsList.Contains(deadEnd))
-            {
-                // Si no está en DeadEndsList, agregarlo
-                DeadEndsList.Add(deadEnd);
-            }
-        }
+      
 
         return DeadEndsList;
     }
