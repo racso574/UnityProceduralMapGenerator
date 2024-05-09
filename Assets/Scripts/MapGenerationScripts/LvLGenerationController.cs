@@ -16,7 +16,7 @@ public class LvlGenerationController : MonoBehaviour
 
     private int[,] bitmap;
     private int[,] roomOrientationMap;
-    private List<Vector2> DeadEndsList;
+    public List<Vector2> DeadEndsList;
 
 
     public void GenerateNewMatrix()

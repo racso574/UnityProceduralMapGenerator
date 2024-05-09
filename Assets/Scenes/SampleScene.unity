@@ -571,8 +571,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 888257655}
-  - component: {fileID: 888257656}
   - component: {fileID: 888257657}
+  - component: {fileID: 888257656}
   - component: {fileID: 888257658}
   m_Layer: 0
   m_Name: MapGenerator
@@ -623,8 +623,10 @@ MonoBehaviour:
   MapSize: {x: 11, y: 11}
   RoomQuantity: 8
   minDeadEnds: 5
-  mapSeed: 1434023633
+  mapSeed: 1962481195
   testiterations: 1
+  DeadEndsList:
+  - {x: 6, y: 6}
 --- !u!114 &888257658
 MonoBehaviour:
   m_ObjectHideFlags: 0
