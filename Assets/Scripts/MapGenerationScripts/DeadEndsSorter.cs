@@ -6,9 +6,10 @@ public class DeadEndsSorter : MonoBehaviour
 {
     private List<Vector2> DeadEndsList;
 
-    public List<Vector2> GetSortedDeadEndsList(int[,] roomOrientationMap)
+    public List<Vector2> GetSortedDeadEndsList(int[,] roomOrientationMap, int mapSeed)
     {
         DeadEndsList = new List<Vector2>();
+        Random.InitState(mapSeed);
 
         // Encuentra todas las casillas deadends y guárdalas en una lista
         List<Vector2> deadEnds = FindDeadEnds(roomOrientationMap);

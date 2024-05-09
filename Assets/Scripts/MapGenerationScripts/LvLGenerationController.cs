@@ -34,7 +34,7 @@ public class LvlGenerationController : MonoBehaviour
         DeadEndsSorter roomTypeDesignator = GetComponent<DeadEndsSorter>();
         mapSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         (bitmap, roomOrientationMap) = matrixGenerator.StartRoomOrientationMatrixGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
-        DeadEndsList = roomTypeDesignator.GetSortedDeadEndsList(roomOrientationMap);
+        DeadEndsList = roomTypeDesignator.GetSortedDeadEndsList(roomOrientationMap , mapSeed);
         DrawMatrix(roomOrientationMap,DeadEndsList, cubePrefab);
     }
 
