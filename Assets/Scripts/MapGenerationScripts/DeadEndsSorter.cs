@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeadEndsSorter : MonoBehaviour
@@ -24,10 +25,12 @@ public class DeadEndsSorter : MonoBehaviour
         // Utiliza el algoritmo de búsqueda de caminos para encontrar el camino más largo
         Vector2 farthestDeadEnd1 = FindFarthestDeadEnd(startDeadEnd, roomOrientationMap);
         DeadEndsList.Add(farthestDeadEnd1);
-        Vector2 farthestDeadEnd2 = FindFarthestDeadEnd(farthestDeadEnd1, roomOrientationMap);
-        DeadEndsList.Add(farthestDeadEnd2);
-        
-      
+
+        // Ordena los demás deadends según su distancia a farthestDeadEnd1
+        List<Vector2> otherDeadEnds = deadEnds.Where(deadEnd => deadEnd != farthestDeadEnd1)
+                                       .OrderByDescending(deadEnd => Vector2.Distance(farthestDeadEnd1, deadEnd))
+                                       .ToList();
+        DeadEndsList.AddRange(otherDeadEnds);
 
         return DeadEndsList;
     }
