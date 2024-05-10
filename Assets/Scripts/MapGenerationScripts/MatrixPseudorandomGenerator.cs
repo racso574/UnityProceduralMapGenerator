@@ -10,14 +10,14 @@ public class MatrixPseudorandomGenerator : MonoBehaviour
     private int[,] bitmap;
     private int[,] roomOrientationMap;
 
-    public (int[,], int[,]) StartRoomOrientationMatrixGeneration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
+    public int[,] StartRoomOrientationMatrixGeneration(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)
     {
         contarodorejecuciones = 0;
         UnityEngine.Random.InitState(mapSeed);
         bitmap = new int[MapSize.x, MapSize.y];
         PrepareMatrixBeforeFilling(MapSize, RoomQuantity, minDeadEnds, mapSeed);
         //Debug.Log("contarodorejecuciones" + contarodorejecuciones+" y " + roomsPlaced);
-        return (bitmap, roomOrientationMap);
+        return (roomOrientationMap);
     }
 
     void PrepareMatrixBeforeFilling(Vector2Int MapSize, int RoomQuantity, int minDeadEnds, int mapSeed)

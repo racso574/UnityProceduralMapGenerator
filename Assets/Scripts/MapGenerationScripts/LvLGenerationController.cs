@@ -13,8 +13,7 @@ public class LvlGenerationController : MonoBehaviour
 
     public int mapSeed;
     public int testiterations;
-
-    private int[,] bitmap;
+    
     private int[,] roomOrientationMap;
     public List<Vector2> DeadEndsList;
     public GameObject cubePrefab;
@@ -33,7 +32,7 @@ public class LvlGenerationController : MonoBehaviour
         MatrixPseudorandomGenerator matrixGenerator = GetComponent<MatrixPseudorandomGenerator>();
         DeadEndsSorter roomTypeDesignator = GetComponent<DeadEndsSorter>();
         mapSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
-        (bitmap, roomOrientationMap) = matrixGenerator.StartRoomOrientationMatrixGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
+        roomOrientationMap = matrixGenerator.StartRoomOrientationMatrixGeneration(MapSize, RoomQuantity, minDeadEnds, mapSeed);
         DeadEndsList = roomTypeDesignator.GetSortedDeadEndsList(roomOrientationMap , mapSeed);
         DrawMatrix(roomOrientationMap,DeadEndsList, cubePrefab);
     }
@@ -60,23 +59,23 @@ public class LvlGenerationController : MonoBehaviour
         {
             for (int j = 0; j < matrix.GetLength(1); j++)
             {
-                Vector3 position = new Vector3(j, -i, 0); // Invertimos la posición en Y para que la matriz se vea correctamente
+                Vector3 position = new Vector3(j, -i, 0); // Invertimos la posiciï¿½n en Y para que la matriz se vea correctamente
 
                 Color color = (matrix[i, j] == 0) ? blackColor : whiteColor;
 
-                // Comprobar si la celda actual está en la lista de celdas destacadas
+                // Comprobar si la celda actual estï¿½ en la lista de celdas destacadas
                 Vector2Int currentCell = new Vector2Int(i, j);
                 int highlightedIndex = highlightedCells.IndexOf(currentCell);
                 if (highlightedIndex != -1)
                 {
-                    // Asignar un color diferente según el índice en la lista
+                    // Asignar un color diferente segï¿½n el ï¿½ndice en la lista
                     if (highlightedIndex < highlightColors.Length)
                     {
                         color = highlightColors[highlightedIndex];
                     }
                     else
                     {
-                        color = Color.yellow; // Si hay más elementos en la lista que colores, usar amarillo para los restantes
+                        color = Color.yellow; // Si hay mï¿½s elementos en la lista que colores, usar amarillo para los restantes
                     }
                 }
 
